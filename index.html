@@ -1,0 +1,85 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Liga de Natación</title>
+  <link rel="stylesheet" href="./css/estilos.css" />
+</head>
+
+<body>
+  <div id="pagina" class="cargando">
+    <header>
+      <nav id="main-menu" class="fila">
+        <div id="logo">Logo</div>
+        <ul></ul>
+      </nav>
+    </header>
+    <div class="vista vista-inicio">inicio</div>
+    <!-- Comienza vista-registro -->
+    <div class="vista vista-registro">
+      <form id="registro">
+        <div class="campo">
+          <label>Correo electrónico:</label>
+          <input type="email" name="email" class="input" required />
+        </div>
+        <div class="campo">
+          <label>Nombre:</label>
+          <input type="text" name="nombre" class="input" required />
+        </div>
+        <div class="campo">
+          <label>Contraseña:</label>
+          <input type="password" name="pass" class="input" required />
+        </div>
+        <p class="form-mensajes"></p>
+        <div class="fila space-between">
+          <div class="columna">
+            <button type="submit" class="boton">
+              Crear cuenta
+            </button>
+          </div>
+          <div class="columna">
+            <a href="#" onclick="navegacion.ir('login')">¿Ya tienes cuenta?</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- Termina vista-registro -->
+    <!-- Comienza vista-login -->
+    <div class="vista vista-login">
+      <form id="login">
+        <div class="campo">
+          <label>Correo electrónico:</label>
+          <input type="email" name="email" class="input" placeholder="Ej.: flor@gmail.com" required />
+        </div>
+        <div class="campo">
+          <label>Contraseña:</label>
+          <input type="password" name="pass" class="input" required />
+        </div>
+        <p class="form-mensajes"></p>
+        <div class="fila space-between">
+          <div class="columna">
+            <button type="submit" class="boton">
+              Iniciar sesión
+            </button>
+          </div>
+          <div class="columna">
+            <a href="#" onclick="navegacion.ir('registro')">Registrar cuenta</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!--  Termina vista-login -->
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="./js/scripts/utilidades.js"></script>
+  <script src="./js/scripts/forms.js"></script>
+  <script src="./js/scripts/usuarios.js"></script>
+  <script src="./js/scripts/navegacion.js"></script>
+  <script src="./js/scripts/vista-login.js"></script>
+  <script src="./js/scripts/vista-registro.js"></script>
+  <script src="./js/scripts/dev.js"></script>
+</body>
+
+</html>

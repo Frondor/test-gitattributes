@@ -1,0 +1,72 @@
+body {
+  color: #333;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+p,
+ul {
+  margin: 0;
+}
+
+.cargando .vista {
+  display: none;
+}
+
+/**
+ * Grilla
+ */
+.fila {
+  display: flex;
+}
+.space-between {
+  justify-content: space-between;
+}
+
+/**
+ * Formularios
+ */
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+  font-weight: bold;
+}
+
+.campo input {
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.form-mensajes {
+  display: none;
+  background: #ff3838;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #d00000;
+  margin-bottom: 20px;
+}
+
+/**
+ * Menu principal
+ */
+#main-menu {
+  justify-content: space-between;
+}
+
+#main-menu ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+#main-menu li a {
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+}

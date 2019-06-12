@@ -1,5 +1,7 @@
-// navegacion.ir('registro');
+// navegacion.ir('login');
 
-usuarios.crear('test', 'test@test.com', 'test123');
-usuarios.login('test@test.com', 'test123');
-navegacion.ir('inicio');
+navegacion.iniciar(function() {
+  usuarios.crear('test', 'test@test.com', 'test123');
+  usuarios.login('test@test.com', 'test123');
+  navegacion.ir('cuenta');
+});

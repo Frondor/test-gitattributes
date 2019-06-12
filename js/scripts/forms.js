@@ -8,6 +8,7 @@ function Form(id, campos, validaciones, submit) {
   this.$form = $('#' + id);
   this.$mensajes = this.$form.find('.form-mensajes');
   this.$inputs = {};
+  this.validaciones = validaciones;
 
   // cacheamos los inputs en un objeto indexado por el nombre del campo
   for (var i = 0; i < campos.length; i++) {
@@ -15,19 +16,24 @@ function Form(id, campos, validaciones, submit) {
     this.$inputs[campo] = this.$form.find('input[name=' + campo + ']');
   }
 
+  this.obtenerValor = function(campo) {
+    var input = this.$inputs[campo];
+    if (input) return input.val();
+  };
+
   /**
-   * Este método ejecuta todas las funciones de validación registradas por cada camopo
+   * Este método ejecuta todas las funciones de validación registradas por cada campo
    * y devuelve un array con los mensajes de error resultantes
    */
   this.validar = function() {
     var errores = [];
-    if (!validaciones) return errores;
+    if (!this.validaciones) return errores;
 
     for (var i = 0; i < campos.length; i++) {
       var campo = campos[i];
-      var validacion = validaciones[campo];
+      var validacion = this.validaciones[campo];
       if (validacion) {
-        var valor = this.$inputs[campo].val();
+        var valor = this.obtenerValor(campo);
         var error = validacion(valor);
         if (error) errores.push(error);
       }
@@ -36,20 +42,38 @@ function Form(id, campos, validaciones, submit) {
     return errores;
   };
 
-  /**
-   * Este método obtiene un array de mensajes de error, y los muestra
-   * dentro del formulario
-   */
-  this.notificar = function(errores) {
+  this.cerrarMensajes = function() {
     this.$mensajes.hide().empty();
-    if (!errores.length) return;
+  };
+
+  /**
+   * Este método obtiene un array de mensajes, y los muestra dentro del formulario
+   * Por defecto como mensajes de error a menos que "exito" sea true
+   */
+  this.notificar = function(mensajes, exito) {
+    this.cerrarMensajes();
+    if (!mensajes.length) return;
+    if (exito) this.$mensajes.addClass('exito');
+    else this.$mensajes.removeClass('exito');
 
     var $lista = $('<ul>');
-    for (var i = 0; i < errores.length; i++) {
-      var error = $('<li>').text(errores[i]);
+    for (var i = 0; i < mensajes.length; i++) {
+      var error = $('<li>').text(mensajes[i]);
       $lista.append(error);
     }
     this.$mensajes.html($lista).show();
+  };
+
+  this.limpiarCampos = function() {
+    for (var i = 0; i < campos.length; i++) {
+      var input = this.$inputs[campos[i]];
+      if (input) input.val('');
+    }
+  };
+
+  this.reset = function() {
+    this.cerrarMensajes();
+    this.limpiarCampos();
   };
 
   // adjuntamos al evento "submit" del form una función con lógica de validación

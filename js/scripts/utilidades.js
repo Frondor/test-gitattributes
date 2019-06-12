@@ -1,5 +1,5 @@
 function esNumero(caracter) {
-  return typeof parseInt(caracter) === 'number';
+  return !isNaN(parseInt(caracter));
 }
 
 function esLetra(caracter) {

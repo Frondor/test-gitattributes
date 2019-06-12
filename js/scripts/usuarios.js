@@ -16,13 +16,34 @@ function Usuarios() {
     return true;
   };
   this.login = function(email, pass) {
-    this.usuarioActual = this.lista.find(function(usuario) {
-      return usuario.email === email && usuario.pass === pass;
-    });
+    this.usuarioActual = this.obtener({ email, pass });
     return this.usuarioActual;
   };
   this.logout = function() {
     this.usuarioActual = null;
+  };
+
+  /**
+   * Encuentra un usuario registrado dados múltiples valores que deben coincidir con las
+   * propiedades del usuario.
+   * El parámetro "valores" es un objeto cuyas propiedades deben coincidir con las del usuario
+   */
+  this.obtener = function(valores) {
+    return this.lista.find(function(usuario) {
+      var analizadas = 0;
+      var coincidencias = 0;
+      for (var propiedad in valores) {
+        if (
+          usuario[propiedad] &&
+          usuario[propiedad] == valores[propiedad]
+        ) {
+          coincidencias++;
+        }
+        analizadas++;
+      }
+
+      return coincidencias === analizadas;
+    });
   };
 }
 

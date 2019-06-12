@@ -1,6 +1,17 @@
+navegacion.registrarVista({
+  id: 'login',
+  label: 'Entrar',
+  configurar: function() {
+    loginForm.reset();
+  },
+  condicion: function(usuario) {
+    return !usuario;
+  },
+});
+
 function iniciarSesion(form) {
-  var email = form.$inputs.email.val();
-  var pass = form.$inputs.pass.val();
+  var email = form.obtenerValor('email');
+  var pass = form.obtenerValor('pass');
   if (usuarios.login(email, pass)) {
     navegacion.ir('inicio');
   } else {

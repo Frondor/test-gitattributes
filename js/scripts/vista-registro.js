@@ -1,7 +1,14 @@
+navegacion.registrarVista({
+  id: 'registro',
+  configurar: function() {
+    registroForm.reset();
+  },
+});
+
 function registrarSocio(form) {
-  var nombre = form.$inputs.nombre.val();
-  var email = form.$inputs.email.val();
-  var pass = form.$inputs.pass.val();
+  var nombre = form.obtenerValor('nombre');
+  var email = form.obtenerValor('email');
+  var pass = form.obtenerValor('pass');
   if (usuarios.crear(nombre, email, pass)) {
     usuarios.login(email, pass);
     navegacion.ir('inicio');
@@ -28,9 +35,8 @@ var registroForm = new Form(
       if (!valor) return 'Debes ingresar tu contraseña';
       var tieneLetra, tieneNumero;
       for (var i = 0; i < valor.length; i++) {
-        tieneLetra = esLetra(valor[i]);
-        tieneNumero = esNumero(valor[i]);
-        if (tieneLetra && tieneNumero) return;
+        if (!tieneLetra) tieneLetra = esLetra(valor[i]);
+        if (!tieneNumero) tieneNumero = esNumero(valor[i]);
       }
       if (!tieneLetra) return 'La contraseña debe contener al menos 1 letra';
       if (!tieneNumero) return 'La contraseña debe contener al menos 1 número';
